@@ -16,14 +16,10 @@ database.connect();
  * Setup express app
  */
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.EXPRESS_PORT || 3000;
 
 // Start task runner
 taskRunner.start();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
 
 /**
  * Setup middleware
