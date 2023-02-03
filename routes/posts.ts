@@ -1,18 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
+import postsController from "../controllers/postsController";
 import Post from "../models/post";
 const router = express.Router();
 
 /* GET posts. */
-router.get(
-  "/",
-  async function (req: Request, res: Response, next: NextFunction) {
-    // res.render("index", { title: "Express" });
-    const posts = await Post.find({}).exec();
-    console.log(posts);
-    res.send("Hello World!");
-  }
-);
+router.get("/", postsController.get);
 
+/* PUT posts. */
+router.put("/:id", postsController.put);
 export default router;
 
 // run().catch((err) => console.log(err));

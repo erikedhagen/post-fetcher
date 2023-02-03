@@ -50,6 +50,9 @@ const downloadPost = async (id: number) => {
  */
 export default async () => {
   const numPosts = 50;
+
+  console.log(`[downloadPosts]: Fetching ${numPosts} posts...`);
+
   const limit = RateLimit(5);
 
   let promises = [];
@@ -78,6 +81,6 @@ export default async () => {
   const successCount = results.filter((r) => r.status === "success").length;
 
   console.log(
-    `Succesfully saved ${successCount} posts, failed ${failedCount} posts.`
+    `[downloadPosts]: Succesfully saved ${successCount} posts, failed ${failedCount} posts.`
   );
 };

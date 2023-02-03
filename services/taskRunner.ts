@@ -13,11 +13,12 @@ const tasks = [
 
 export default {
   start: () => {
+    console.log("[taskRunner]: Task runner started.");
+
     tasks.forEach((task) => {
       task.callback();
       setInterval(task.callback, task.interval);
     });
 
-    console.log("Task runner started");
   },
 };

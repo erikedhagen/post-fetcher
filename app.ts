@@ -4,7 +4,6 @@ import database from "./services/database";
 import path from "path";
 import taskRunner from "./services/taskRunner";
 
-import indexRouter from "./routes/index";
 import postsRouter from "./routes/posts";
 
 /**
@@ -30,11 +29,11 @@ app.use(express.static(path.join(__dirname, "public")));
  */
 app.use("/posts", postsRouter);
 
-/** 
+/**
  * Start server and task runner
  */
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  console.log(`[server]: Server is running at http://localhost:${port}`);
   taskRunner.start();
 });
 
