@@ -18,9 +18,6 @@ database.connect();
 const app: Express = express();
 const port = process.env.EXPRESS_PORT || 3000;
 
-// Start task runner
-taskRunner.start();
-
 /**
  * Setup middleware
  */
@@ -31,11 +28,14 @@ app.use(express.static(path.join(__dirname, "public")));
 /**
  * Setup routes
  */
-app.use("/", indexRouter);
 app.use("/posts", postsRouter);
 
+/** 
+ * Start server and task runner
+ */
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  taskRunner.start();
 });
 
 export default app;
