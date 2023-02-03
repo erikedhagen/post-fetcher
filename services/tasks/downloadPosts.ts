@@ -1,9 +1,10 @@
 import { RateLimit } from "async-sema";
+import Post from "../../models/post";
 
 /**
  * Fetch a post, retrying N times if it fails
  */
-const fetchPostAndRetry = (id: number, retries = 2): Promise<Post> => {
+const fetchPostAndRetry = (id: number, retries = 2): Promise<IPost> => {
   return fetch(`https://jsonplaceholder.typicode.com/posts/${id}/`)
     .then((res) => res.json())
     .catch((err: Error) => {
@@ -17,8 +18,16 @@ const fetchPostAndRetry = (id: number, retries = 2): Promise<Post> => {
 /**
  * Save a post to the database
  */
-const savePost = (post: Post) => {
-  console.log("save post");
+const savePost = async (post: IPost) => {
+  try {
+    const updatedPost = await Post.findOneAndUpdate({ id: post.id }, post, {
+      upsert: true,
+      new: true,
+    });
+    return updatedPost;
+  } catch (err) {
+    throw err;
+  }
 };
 
 /**
@@ -40,7 +49,7 @@ const downloadPost = async (id: number) => {
  * Download posts from the API and save them to the database.
  */
 export default async () => {
-  const numPosts = 25; //50;
+  const numPosts = 50;
   const limit = RateLimit(5);
 
   let promises = [];

@@ -1,26 +1,22 @@
-import express, { Express, Request, Response } from "express";
-import mongoose from "mongoose";
+import express, { Express } from "express";
+import database from "./services/database";
 
 import path from "path";
 import taskRunner from "./services/taskRunner";
 
+import indexRouter from "./routes/index";
+import postsRouter from "./routes/posts";
+
 /**
  * Connect to database
  */
-mongoose.set("strictQuery", false);
-const connectionString = "mongodb://127.0.0.1:27017/my_database";
-main().catch((err) => console.log(err));
-async function main() {
-  await mongoose.connect(connectionString);
-}
-
-var indexRouter = require("./routes/index");
+database.connect();
 
 /**
  * Setup express app
  */
 const app: Express = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // Start task runner
 taskRunner.start();
@@ -40,9 +36,10 @@ app.use(express.static(path.join(__dirname, "public")));
  * Setup routes
  */
 app.use("/", indexRouter);
+app.use("/posts", postsRouter);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 
-module.exports = app;
+export default app;
