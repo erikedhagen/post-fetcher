@@ -4,6 +4,19 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+
+/**
+ * Connect to database
+ */
+const mongoose = require("mongoose");
+mongoose.set('strictQuery', false);
+const connectionString = "mongodb://127.0.0.1:27017/my_database";
+main().catch(err => console.log(err));
+async function main() {
+  await mongoose.connect(connectionString);
+}
+
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
