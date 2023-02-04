@@ -1,3 +1,5 @@
+import tasks from "./config/tasks";
+
 import express, { Express } from "express";
 import database from "./services/database";
 
@@ -34,7 +36,7 @@ app.use("/posts", postsRouter);
  */
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
-  taskRunner.start();
+  taskRunner.start(tasks);
 });
 
 export default app;

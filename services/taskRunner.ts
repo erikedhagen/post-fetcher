@@ -1,24 +1,13 @@
-import downloadPosts from "./tasks/downloadPosts";
-
 /**
- * Register tasks
+ * Task runner service
  */
-const tasks = [
-  {
-    name: "downloadPosts",
-    interval: 12000,
-    callback: downloadPosts,
-  },
-];
-
 export default {
-  start: () => {
+  start: (tasks: ITask[]) => {
     console.log("[taskRunner]: Task runner started.");
 
     tasks.forEach((task) => {
       task.callback();
       setInterval(task.callback, task.interval);
     });
-
   },
 };
