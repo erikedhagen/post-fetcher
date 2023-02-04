@@ -31,20 +31,30 @@ The REST API is available at http://localhost:3000/api/post.
 
 #### Update a post with new data 
 
-```js
+```json
 // POST /api/posts/:id
 {
-  
+  "title": "Post title",
+  "body": "Post body"
 }
 ```
 
 
-## Architecture
+## Features
 
 ### Express server
-The app runs a vanilla Express.js server. 
-Both the task runner and the API is initiated from *app.js*
+The app starts a vanilla Express.js server. 
+Both the task runner and the API is run by the server process.
+In a production scenario, we would likely want to separate.
 
 ### Task runner
-A task runner service is setup in services/taskRunner.
+A simple task runner to run any function at a given interval.
+Tasks are registered as an array of objects with a name, interval and callback.
+By default, a single task is registered that fetches and saves posts.
 
+### Post fetching
+The task runner is used to repeatedly fetch posts from a remote source, keeping them updated.
+Post that were manually edited are not overwritten.
+
+### Editing API
+Posts can be edited through a simple REST API.
