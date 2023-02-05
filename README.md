@@ -27,7 +27,7 @@ This app has two main features:
 
 ### Updating posts via API
 
-```json
+```javascript
 // POST /api/posts/:id
 {
   "title": "Post title",
