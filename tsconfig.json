@@ -18,5 +18,9 @@
 
     /* Output */
     "outDir": "./dist"
+  },
+  /* ts-node config */
+  "ts-node": {
+    "files": true
   }
 }

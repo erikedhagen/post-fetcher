@@ -6,7 +6,7 @@ import downloadPosts from "../controllers/tasks/downloadPosts";
 export default [
   {
     name: "downloadPosts",
-    interval: 60 * 60,
+    interval: 1000 * 60 * 60,
     callback: downloadPosts,
   },
 ];
