@@ -3,4 +3,5 @@ interface IPost {
   userId: number;
   title: string;
   body: string;
+  lastEditedAt: Date;
 }

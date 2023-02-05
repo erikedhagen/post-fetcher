@@ -5,6 +5,7 @@ const postSchema = new Schema<IPost>({
   title: { type: String, required: true, maxLength: 100 },
   body: { type: String },
   userId: { type: Number },
+  lastEditedAt: { type: Date },
 });
 
 const Post = model<IPost>("Post", postSchema);

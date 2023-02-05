@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import Post from "../models/post";
 
-// GET /posts
+// GET /posts endpoint
 export const get = async (req: Request, res: Response, next: NextFunction) => {
   const posts = await Post.find({}).exec();
   res.send({
@@ -9,14 +9,14 @@ export const get = async (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-// PUT /posts
+// PUT /posts endpoint
 export const put = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   const { title, body } = req.body;
 
   const foundPost = await Post.findOne({ id }).exec();
   if (foundPost) {
-    await Post.updateOne({ id }, { title, body });
+    await Post.updateOne({ id }, { title, body, lastEditedAt: new Date() });
 
     res.status(200).send({
       result: "updated",
