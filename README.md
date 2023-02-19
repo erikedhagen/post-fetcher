@@ -1,4 +1,4 @@
-# Post fetcher - an Adway task
+# Post fetcher
 This is an Express app that fetches posts hourly and stores them in a MongoDB.
 
 ## Requirements
